@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy Points: EuroLeague Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #081729;
+    --bg-card: #0f2440;
+    --bg-card-border: #1c3352;
+    --text: #eef2f7;
+    --text-muted: #93a6bf;
+    --green: #90EE90;
+    --coral: #FF7F7F;
+    --gold: #FFD580;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    padding: 96px 0 64px;
+    border-bottom: 1px solid var(--bg-card-border);
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  /* ---------- SCOREBOARD ---------- */
+
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--bg-card-border);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 40px 0 0;
+  }
+
+  .stat {
+    background: var(--bg-card);
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: clamp(22px, 4vw, 30px);
+    color: var(--green);
+  }
+
+  .stat-label {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- SECTIONS ---------- */
+
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--bg-card-border);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2 .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  p { margin-bottom: 16px; color: #d7dfea; }
+
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--text); }
+
+  a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(144,238,144,0.35); }
+  a:hover { border-bottom-color: var(--green); }
+
+  ul { padding-left: 20px; margin-bottom: 16px; color: #d7dfea; }
+  li { margin-bottom: 10px; }
+  li::marker { color: var(--gold); }
+
+  /* ---------- TABLE ---------- */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--bg-card-border);
+  }
+
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  td.num { font-family: 'IBM Plex Mono', monospace; }
+
+  tr.winners td { color: var(--green); }
+  tr.losers td { color: var(--coral); }
+
+  /* ---------- IMAGES ---------- */
+
+  figure { margin: 28px 0; }
+
+  figure img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--bg-card-border);
+    display: block;
+  }
+
+  figcaption {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* ---------- CALLOUT ---------- */
+
+  .callout {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 24px 0;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .callout strong { color: var(--gold); }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 48px 0 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    padding: 12px 20px;
+    border-radius: 7px;
+    border: 1px solid var(--bg-card-border);
+    color: var(--text);
+    border-bottom-width: 1px;
+  }
+
+  .btn.primary {
+    background: var(--green);
+    color: #08301a;
+    border: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 560px) {
+    .scoreboard { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">EuroLeague · Team Data · 2015–2025</div>
+    <h1>Easy Points: do fast breaks, second chances and turnovers actually win games?</h1>
+    <p class="subtitle">10 seasons of EuroLeague team stats testing whether "easy" points (transition buckets, second chance points, and points off turnovers) really separate winners from losers.</p>
+
+    <div class="scoreboard">
+      <div class="stat">
+        <div class="stat-value">64.4%</div>
+        <div class="stat-label">win rate for the team with more easy points</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0.44</div>
+        <div class="stat-label">correlation with final score differential</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">+2.82</div>
+        <div class="stat-label">turnover points gap, winners vs losers</div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="tag">01</span> Background</h2>
+    <p>Coaches talk a lot about "easy points": transition buckets, offensive rebounds converted into second attempts, points scored off a forced turnover. The intuition is that these possessions matter more than their raw point value suggests, since they come with little defensive resistance and often reflect a team playing with energy and control.</p>
+    <p>This project tests that intuition directly using box-score-level data: <strong>do teams that generate more easy points actually win more often, and how strong is that relationship really?</strong></p>
+  </section>
+
+  <section>
+    <h2><span class="tag">02</span> Data &amp; tools</h2>
+    <ul>
+      <li><strong>Data source:</strong> <a href="https://www.kaggle.com/datasets/babissamothrakis/euroleague-datasets" target="_blank">Euroleague &amp; Eurocup Datasets</a> (Kaggle): team-level fast break, second chance, and turnover points per game, plus final scores</li>
+      <li><strong>Tools:</strong> Python, pandas, matplotlib</li>
+      <li><strong>Scope:</strong> 3,298 EuroLeague games, seasons 2015–16 through 2025–26</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="tag">03</span> Defining "easy points"</h2>
+    <p>"Easy points" is defined here as the sum of three box-score categories: <strong>fast break points</strong> (scored in transition), <strong>second chance points</strong> (scored after an offensive rebound), and <strong>turnover points</strong> (scored off a forced opponent turnover).</p>
+    <p>The analysis first looked at fast break and second chance points alone, which showed only a weak relationship with winning. Adding turnover points, often the most "unearned" of the three, nearly doubled the correlation with the final result, so the metric used throughout combines all three.</p>
+    <div class="callout">Before drawing any conclusions, the underlying data was checked for missing values across all three categories, for every season in scope. <strong>None were found.</strong> The results below aren't an artifact of patchy data in older seasons.</div>
+  </section>
+
+  <section>
+    <h2><span class="tag">04</span> Results</h2>
+
+    <figure>
+      <img src="images/winners_vs_losers_easy_points.png" alt="Winners vs Losers: easy points breakdown">
+      <figcaption>Average points per game, by category: winners vs losers (2015-2025)</figcaption>
+    </figure>
+
+    <table>
+      <thead>
+        <tr><th></th><th>Fast break</th><th>Second chance</th><th>Turnover pts</th><th>Combined</th></tr>
+      </thead>
+      <tbody>
+        <tr class="winners"><td>Winners</td><td class="num">7.14</td><td class="num">11.09</td><td class="num">15.44</td><td class="num"><strong>33.68</strong></td></tr>
+        <tr class="losers"><td>Losers</td><td class="num">6.24</td><td class="num">10.15</td><td class="num">12.62</td><td class="num"><strong>29.01</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p>Winners outscore losers in all three categories, but not by the same margin. Turnover points show the largest gap, noticeably bigger than fast break or second chance points on their own. This suggests forcing turnovers and converting them is the single most discriminating habit among the three.</p>
+
+    <figure>
+      <img src="images/easy_points_vs_score_diff_scatter.png" alt="Easy points differential vs final score differential">
+      <figcaption>Each dot is one game: easy points differential vs final score differential</figcaption>
+    </figure>
+
+    <p>The correlation between easy points differential and final score differential sits at <strong>0.44</strong>, a moderate relationship. The team with more combined easy points wins the game <strong>64.4% of the time</strong> (163 games with an exact tie in easy points excluded). Well above a coin flip, but still: more than 1 in 3 games are won by the team with fewer easy points.</p>
+  </section>
+
+  <section>
+    <h2><span class="tag">05</span> Takeaways</h2>
+    <ul>
+      <li><strong>Not all "easy points" are equally easy to win with.</strong> Turnover points are the strongest of the three individual categories, with a much bigger gap between winners and losers than fast break or second chance points show on their own.</li>
+      <li><strong>The combined metric has real predictive value, but it's not dominant.</strong> A 0.44 correlation and a 64.4% leader-win-rate indicate a genuine, moderate relationship, not proof that easy points decide games by themselves.</li>
+      <li><strong>This likely reflects team quality more than a standalone lever.</strong> Teams that generate a lot of easy points are often also good in transition defense, rebounding, and ball pressure, so the easy points may be a symptom of overall team strength rather than an isolated cause of winning.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <a class="btn primary" href="https://github.com/viare21/euroleague-easy-points" target="_blank">View code on GitHub</a>
+    <a class="btn" href="https://federicoviarengo.com/" target="_blank">Back to portfolio</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
