@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #081729;
-    --bg-card: #0f2440;
-    --bg-card-border: #1c3352;
-    --text: #eef2f7;
-    --text-muted: #93a6bf;
-    --green: #90EE90;
-    --coral: #FF7F7F;
-    --gold: #FFD580;
+    --bg: #F2F5D9;
+    --bg-card: #FBFCEE;
+    --border: #D6DFA8;
+    --text: #16233F;
+    --text-muted: #5B6650;
+    --green: #3E8E4F;
+    --coral: #C6564F;
+    --gold: #B8860B;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +39,7 @@
 
   .hero {
     padding: 96px 0 64px;
-    border-bottom: 1px solid var(--bg-card-border);
+    border-bottom: 1px solid var(--border);
   }
 
   .eyebrow {
@@ -58,6 +58,7 @@
     line-height: 1.15;
     letter-spacing: -0.01em;
     margin-bottom: 20px;
+    color: var(--text);
   }
 
   .subtitle {
@@ -72,8 +73,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    background: var(--bg-card-border);
-    border: 1px solid var(--bg-card-border);
+    background: var(--border);
+    border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
     margin: 40px 0 0;
@@ -103,7 +104,7 @@
 
   section {
     padding: 56px 0;
-    border-bottom: 1px solid var(--bg-card-border);
+    border-bottom: 1px solid var(--border);
   }
 
   section:last-of-type { border-bottom: none; }
@@ -116,6 +117,7 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
+    color: var(--text);
   }
 
   h2 .tag {
@@ -125,16 +127,16 @@
     color: var(--gold);
   }
 
-  p { margin-bottom: 16px; color: #d7dfea; }
+  p { margin-bottom: 16px; color: var(--text); }
 
   p:last-child { margin-bottom: 0; }
 
   strong { color: var(--text); }
 
-  a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(144,238,144,0.35); }
+  a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(62,142,79,0.35); }
   a:hover { border-bottom-color: var(--green); }
 
-  ul { padding-left: 20px; margin-bottom: 16px; color: #d7dfea; }
+  ul { padding-left: 20px; margin-bottom: 16px; color: var(--text); }
   li { margin-bottom: 10px; }
   li::marker { color: var(--gold); }
 
@@ -145,12 +147,16 @@
     border-collapse: collapse;
     margin: 24px 0;
     font-size: 14.5px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   th, td {
     text-align: left;
     padding: 12px 14px;
-    border-bottom: 1px solid var(--bg-card-border);
+    border-bottom: 1px solid var(--border);
   }
 
   th {
@@ -174,8 +180,9 @@
   figure img {
     width: 100%;
     border-radius: 10px;
-    border: 1px solid var(--bg-card-border);
+    border: 1px solid var(--border);
     display: block;
+    box-shadow: 0 8px 24px rgba(22,35,63,0.12);
   }
 
   figcaption {
@@ -189,7 +196,7 @@
 
   .callout {
     background: var(--bg-card);
-    border: 1px solid var(--bg-card-border);
+    border: 1px solid var(--border);
     border-left: 3px solid var(--gold);
     border-radius: 8px;
     padding: 18px 20px;
@@ -214,14 +221,14 @@
     font-size: 13.5px;
     padding: 12px 20px;
     border-radius: 7px;
-    border: 1px solid var(--bg-card-border);
+    border: 1px solid var(--border);
     color: var(--text);
-    border-bottom-width: 1px;
+    background: var(--bg-card);
   }
 
   .btn.primary {
     background: var(--green);
-    color: #08301a;
+    color: #FBFCEE;
     border: none;
     font-weight: 600;
   }
